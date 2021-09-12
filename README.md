@@ -29,4 +29,8 @@ npm run test
 
 ![image](https://user-images.githubusercontent.com/59105868/132993900-475515dc-1e07-4bb4-ae6c-e880d67d91ed.png)
 
+### To activate notifications you must activate these boxes
+
+![image](https://user-images.githubusercontent.com/59105868/132994004-d381dfe4-bf3d-4345-89f3-63fd9a46d67c.png)
+
 #### and for now nothing else
