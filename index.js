@@ -63,7 +63,7 @@ function createWindow() {
     });
 
     //Splash
-    splash = new BrowserWindow({ width: 640, height: 480, transparent: true, frame: false, alwaysOnTop: true });
+    splash = new BrowserWindow({ width: 650, height: 450, transparent: true, frame: false, alwaysOnTop: true });
     splash.loadFile("boot.html");
     // Load Discord
     win.webContents.setUserAgent(userAgent);
