@@ -1,0 +1,11 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "Practica en electron",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "author": "SrWither",
+  "license": "BSD-3-Clause"
+}
