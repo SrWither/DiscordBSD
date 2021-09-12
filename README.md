@@ -35,7 +35,7 @@ npm run test
 
 ### Splash Screen
 
-![Boot](https://user-images.githubusercontent.com/59105868/133003256-18262ba3-8237-4a0c-a3c4-b0d1714f7247.gif)
+![Boot](https://user-images.githubusercontent.com/59105868/133003303-f491b628-0c66-4449-94f6-ed9d7f8d4f8a.gif)
 
 #### and for now nothing else
 
