@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+const { app, BrowserWindow, Tray, Menu, desktopCapturer } = require('electron');
 const path = require('path');
 const userAgent =
     "Mozilla/5.0 (X11; CrOS x86_64 13982.82.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.157 Safari/537.36";
@@ -9,7 +9,7 @@ const userAgent =
 Menu.setApplicationMenu(false)
 
 // Win - Icons Var
-
+var splash
 var win = '',
     appIcon = null,
     iconpath = path.join(__dirname, 'assets/icon.png');
@@ -23,6 +23,7 @@ function createWindow() {
     win = new BrowserWindow({
         width: 1280,
         height: 720,
+        show: false,
         // frame: false, // Disable appmenu
         webPreferences: {
             nodeIntegration: true
@@ -61,9 +62,17 @@ function createWindow() {
         return false;
     });
 
+    //Splash
+    splash = new BrowserWindow({ width: 810, height: 610, transparent: true, frame: false, alwaysOnTop: true });
+    splash.loadFile("boot.html");
     // Load Discord
     win.webContents.setUserAgent(userAgent);
     win.loadURL('https://discord.com/app');
+
+    win.once('ready-to-show', () => {
+        splash.destroy();
+        win.show();
+    });
 }
 
 app.on('ready', createWindow);
