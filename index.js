@@ -1,5 +1,8 @@
 const { app, BrowserWindow, Tray, Menu } = require('electron');
 const path = require('path');
+const userAgent =
+    "Mozilla/5.0 (X11; CrOS x86_64 13982.82.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.157 Safari/537.36";
+
 
 // Disable Menu
 
@@ -59,7 +62,7 @@ function createWindow() {
     });
 
     // Load Discord
-
+    win.webContents.setUserAgent(userAgent);
     win.loadURL('https://discord.com/app');
 }
 
