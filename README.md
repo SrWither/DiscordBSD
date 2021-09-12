@@ -33,6 +33,10 @@ npm run test
 
 ![image](https://user-images.githubusercontent.com/59105868/132994004-d381dfe4-bf3d-4345-89f3-63fd9a46d67c.png)
 
+### Splash Screen
+
+https://user-images.githubusercontent.com/59105868/133003233-596a4dcc-d820-4d56-a617-7a3e753f6d56.mp4
+
 #### and for now nothing else
 
 #### Webcam works, but screen cast still doesn't work
