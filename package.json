@@ -7,5 +7,8 @@
     "test": "electron13 ."
   },
   "author": "SrWither",
-  "license": "BSD-3-Clause"
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "electron-builder": "^22.14.5"
+  }
 }
