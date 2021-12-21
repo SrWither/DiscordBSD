@@ -1,10 +1,10 @@
 {
   "name": "electron",
   "version": "1.0.0",
-  "description": "Practica en electron",
+  "description": "Discord Client",
   "main": "index.js",
   "scripts": {
-    "test": "electron12 ."
+    "test": "electron13 ."
   },
   "author": "SrWither",
   "license": "BSD-3-Clause"
