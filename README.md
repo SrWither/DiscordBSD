@@ -23,6 +23,9 @@ sh install.sh
 
 ![image](https://user-images.githubusercontent.com/59105868/132993874-18d21c32-edf8-44f5-9438-6912f7660d68.png)
 
+### Discord Rich Presence
+![image](https://user-images.githubusercontent.com/59105868/218270615-a30de821-9148-4d25-b614-4f167aec3a7d.png)
+
 ### Notifications
 
 ![image](https://user-images.githubusercontent.com/59105868/132993900-475515dc-1e07-4bb4-ae6c-e880d67d91ed.png)
