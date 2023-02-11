@@ -1,18 +1,16 @@
 # DiscordBSD
-to start it you need to have electron12 installed:
+to start it you need to have electron19 and node18 installed:
 
 Compiling it:
 ```
-cd /usr/ports/devel/electron12/ && make install clean
+pkg install electron19
+pkg install node-18
+pkg install npm-node18
 ```
-
-or install the already compiled version from here:
-
-https://github.com/tagattie/FreeBSD-Electron/releases/tag/v12.0.7
 
 and run the following command:
 ```
-npm run test
+sh install.sh
 ```
 
 # Preview
