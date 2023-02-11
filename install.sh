@@ -19,7 +19,7 @@ npm install
 cd RPC
 npm install
 
-sed -i '' "s/Icon=discicon/Icon=\/home\/$USER\/.local\/share\/icons\/Discord.png/" ~/.local/share/applications/discord.desktop
+sed -i '' "s/Icon=discicon/Icon=\/home\/$USER\/.local\/share\/icons\/Discord.png/" ~/.local/share/applications/Discord.desktop
 
 sed -i '' "s/Exec=executable/Exec=\/home\/$USER\/.local\/bin\/discord/" ~/.local/share/applications/Discord.desktop
 
