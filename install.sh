@@ -10,7 +10,7 @@ chmod +x bin/discord
 cp -r RPC ~/.local/share/discordbsd
 cp -r src ~/.local/share/discordbsd/discord
 cp package.json ~/.local/share/discordbsd
-cp bin/* ~/.local/share/bin
+cp bin/* ~/.local/bin
 cp share/applications/* ~/.local/share/applications
 cp share/icons/* ~/.local/share/icons
 
