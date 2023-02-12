@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+
 cd ~/.local/share/discordbsd
 node RPC/src &
 electron19 discord/
+kill $(jobs -p -r)
