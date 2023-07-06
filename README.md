@@ -4,7 +4,7 @@ to start it you need to have electron19 and node18 installed:
 Compiling it:
 ```
 pkg install electron19
-pkg install node-18
+pkg install node18
 pkg install npm-node18
 ```
 
