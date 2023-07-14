@@ -2,5 +2,5 @@
 
 cd ~/.local/share/discordbsd
 node RPC/src &
-electron19 discord/
+electron24 discord/
 kill $(jobs -p -r)
