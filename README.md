@@ -17,7 +17,7 @@ get it here: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses
 ### Build and install:
 clone the repository:
 ```
-git clone --branch dev-ts https://github.com/SrWither/DiscordBSD
+git clone https://github.com/SrWither/DiscordBSD
 ```
 
 first you need to run the `build.sh` script.
