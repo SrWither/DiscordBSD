@@ -1,43 +1,51 @@
-# DiscordBSD
-to start it you need to have electron19 and node18 installed:
+# DiscordBSD - Beta
+An attempt at a native discord client for FreeBSD.
 
-Compiling it:
+### Dependencies:
 ```
-pkg install electron24
+pkg install bash
+pkg install electron25
 pkg install node18
 pkg install npm-node18
 ```
+**Make dependencie:**
+```
+electron.mk (/usr/ports/Mk/Uses/electron.mk)
+```
+get it here: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses
 
-and run the following command:
+### Build and install:
+clone the repository:
 ```
-sh install.sh
+git clone --branch dev-ts https://github.com/SrWither/DiscordBSD
 ```
+
+first you need to run the `build.sh` script.
+the script will ask you to elevate permissions to be able to package the application in a binary, the permissions are due to the use of `bsd.mk`.
+
+if everything compiled without errors, run the `install.sh` script.
 
 # Preview
+### Overview and custom titlebar
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/d4934fc8-e169-4e6c-8a1e-01b1f90dc203)
+_the color scheme is from discord nitro_
 
-### Overview
+### System tray
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/f0bf9be8-f61d-468a-8d4b-c54bc7c71897)
 
-![image](https://user-images.githubusercontent.com/59105868/132993833-1c33cf39-130d-4bdf-b1ea-8ab94ce21291.png)
-
-### Tray
-
-![image](https://user-images.githubusercontent.com/59105868/132993874-18d21c32-edf8-44f5-9438-6912f7660d68.png)
+_if you click in the icon, if you click on the icon, it will focus on the window_
 
 ### Discord Rich Presence
-![image](https://user-images.githubusercontent.com/59105868/218270615-a30de821-9148-4d25-b614-4f167aec3a7d.png)
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/7f097273-7e21-4e66-b1f0-5cd33768b397)
 
-### Notifications
+### Screenshare
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/e9124e61-dbc3-416f-812a-10ac5257738d)
+_no sound for now_
 
-![image](https://user-images.githubusercontent.com/59105868/132993900-475515dc-1e07-4bb4-ae6c-e880d67d91ed.png)
-
-### To activate notifications you must activate these boxes
-
-![image](https://user-images.githubusercontent.com/59105868/132994004-d381dfe4-bf3d-4345-89f3-63fd9a46d67c.png)
+### Desktop Notifications
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/18fc3cb0-2223-49c4-a1ce-a997e12b3f8c)
+_you have to activate them there_
 
 ### Splash Screen
-
 ![Boot](https://user-images.githubusercontent.com/59105868/133003303-f491b628-0c66-4449-94f6-ed9d7f8d4f8a.gif)
 
-#### and for now nothing else
-
-#### Webcam works, but screen cast still doesn't work

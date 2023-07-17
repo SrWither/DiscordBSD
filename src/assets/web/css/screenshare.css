@@ -1,0 +1,89 @@
+.screenshare-main {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-width: 500px;
+  max-height: 80%;
+  z-index: 99998;
+  padding: 20px;
+  background: #36393f;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.discordbsd-screenshare {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99991;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenshare-cancel {
+  background-color: #ff4136;
+  color: #fff;
+  border: none;
+  padding: 10px 20px 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 1rem 0px 0rem;
+}
+
+
+.screenshare-cancel:hover {
+  background-color: #dc352a;
+}
+
+.screenshare-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.screenshare-source {
+  width: calc(50% - 5px);
+  margin-bottom: 10px;
+}
+
+.screenshare-source-selection {
+  display: block;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.screenshare-source-selection:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.screenshare-source-image {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 4px;
+}
+
+.screenshare-source-name {
+  display: block;
+  margin-top: 5px;
+  text-align: center;
+  color: #fff;
+}
