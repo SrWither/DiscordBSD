@@ -38,6 +38,6 @@ cd ..
 # move files
 mkdir -p share/discordbsd
 cp -r RPC share/discordbsd
-cp -r freebsd/work/DiscordBSD-dev-ts/dist/linux-unpacked share/discordbsd/discord
+cp -r freebsd/work/DiscordBSD-main/dist/linux-unpacked share/discordbsd/discord
 
 echo "Done!"
