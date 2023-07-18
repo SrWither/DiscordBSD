@@ -35,7 +35,7 @@ _the color scheme is from discord nitro_
 ### System tray
 ![image](https://github.com/SrWither/DiscordBSD/assets/59105868/f0bf9be8-f61d-468a-8d4b-c54bc7c71897)
 
-_if you click in the icon, if you click on the icon, it will focus on the window_
+_if you click on the icon, it will focus on the window_
 
 ### Discord Rich Presence
 ![image](https://github.com/SrWither/DiscordBSD/assets/59105868/7f097273-7e21-4e66-b1f0-5cd33768b397)
