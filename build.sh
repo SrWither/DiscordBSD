@@ -1,23 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-echo "Need to elevate permissions to pack DiscordBSD. Do you want to execute the command with doas or sudo?"
-select option in "doas" "sudo"; do
-    case $option in
-        doas)
-            discordbsd_perms_command="doas"
-            break
-            ;;
-        sudo)
-            discordbsd_perms_command="sudo"
-            break
-            ;;
-        *)
-            echo "Invalid option. Please select 1 or 2."
-            ;;
-    esac
-done
+echo "Need to elevate permissions to pack DiscordBSD. Do you want to execute the command with doas or sudo? (1 for doas, 2 for sudo)"
+read -r option
 
-if [[ -f /usr/ports/Mk/Uses/electron.mk ]]; then
+case $option in
+    1)
+        discordbsd_perms_command="doas"
+        ;;
+    2)
+        discordbsd_perms_command="sudo"
+        ;;
+    *)
+        echo "Invalid option. Please enter 1 or 2."
+        exit 1
+        ;;
+esac
+
+if [ -f /usr/ports/Mk/Uses/electron.mk ]; then
     echo "electron.mk checked"
 else
     echo "The file /usr/ports/Mk/Uses/electron.mk does not exist. Please get it from: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses"
