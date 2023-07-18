@@ -8,7 +8,6 @@ mkdir -p ~/.local/share/icons
 chmod +x bin/discord
 
 cp -r share/discordbsd/* ~/.local/share/discordbsd
-cp package.json ~/.local/share/discordbsd
 cp bin/* ~/.local/bin
 cp share/applications/* ~/.local/share/applications
 cp share/icons/* ~/.local/share/icons
