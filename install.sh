@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo "Installing DiscordBSD"
 
 mkdir -p ~/.local/bin

@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 cd ~/.local/share/discordbsd
 node RPC/src &
 ./discord/discordbsd
-kill $(jobs -p -r)
+kill `pgrep -P $$`

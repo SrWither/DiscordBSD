@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 echo "Need to elevate permissions to pack DiscordBSD. Do you want to execute the command with doas or sudo?"
 select option in "doas" "sudo"; do
@@ -17,7 +17,7 @@ select option in "doas" "sudo"; do
     esac
 done
 
-if [[ -f /usr/ports/Mk/Uses/electron.mk ]]; then
+if [ -f /usr/ports/Mk/Uses/electron.mk ]; then
     echo "electron.mk checked"
 else
     echo "The file /usr/ports/Mk/Uses/electron.mk does not exist. Please get it from: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses"
