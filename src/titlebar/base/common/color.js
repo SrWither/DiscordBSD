@@ -340,6 +340,7 @@ class Color {
     return of.darken(factor);
   }
 }
+exports.Color = _get__("Color");
 _get__("Color").WHITE = new (_get__("Color"))(new (_get__("RGBA"))(255, 255, 255, 1));
 _get__("Color").BLACK = new (_get__("Color"))(new (_get__("RGBA"))(0, 0, 0, 1));
 _get__("Color").RED = new (_get__("Color"))(new (_get__("RGBA"))(255, 0, 0, 1));
@@ -348,7 +349,6 @@ _get__("Color").GREEN = new (_get__("Color"))(new (_get__("RGBA"))(0, 255, 0, 1)
 _get__("Color").CYAN = new (_get__("Color"))(new (_get__("RGBA"))(0, 255, 255, 1));
 _get__("Color").LIGHTGREY = new (_get__("Color"))(new (_get__("RGBA"))(211, 211, 211, 1));
 _get__("Color").TRANSPARENT = new (_get__("Color"))(new (_get__("RGBA"))(0, 0, 0, 0));
-exports.Color = _get__("Color");
 (function (Color) {
   let Format;
   (function (Format) {
@@ -515,8 +515,7 @@ exports.Color = _get__("Color");
       }
     })(CSS = Format.CSS || (Format.CSS = {}));
   })(Format = Color.Format || (Color.Format = {}));
-})(_assign__("Color", exports.Color || (exports.Color = {})));
-exports.Color = _get__("Color");
+})(_get__("Color") || (exports.Color = _assign__("Color", {})));
 function _getGlobalObject() {
   try {
     if (!!global) {

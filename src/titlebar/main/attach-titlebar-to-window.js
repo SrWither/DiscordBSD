@@ -1,11 +1,14 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 /* ---------------------------------------------------------------------------------------------
  *  Copyright (c) AlexTorresDev. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 const consts_1 = require("../consts");
-module.exports = browserWindow => {
+exports.default = browserWindow => {
   browserWindow.setMinimumSize(_get__("consts_1").WINDOW_MIN_WIDTH, _get__("consts_1").WINDOW_MIN_HEIGHT);
   browserWindow.on('enter-full-screen', () => {
     browserWindow.webContents.send('window-fullscreen', true);

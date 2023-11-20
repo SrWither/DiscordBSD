@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.MenuBar = void 0;
+const electron_1 = require("electron");
 const DOM = _get__("__importStar")(require("../base/common/dom"));
 const event_1 = require("../base/common/event");
 const lifecycle_1 = require("../base/common/lifecycle");
@@ -153,7 +154,6 @@ class MenuBar extends _get__("lifecycle_1").Disposable {
       if (!this.options.enableMnemonics || !e.altKey || e.ctrlKey || e.defaultPrevented) {
         return;
       }
-      console.log(this.mnemonics);
       const key = e.key.toLocaleLowerCase();
       if (!this.mnemonics.has(key)) {
         return;
@@ -510,9 +510,9 @@ class MenuBar extends _get__("lifecycle_1").Disposable {
       const replaceDoubleEscapes = str => str.replace(/&amp;&amp;/g, '&amp;');
       if (escMatch) {
         titleElement.innerText = '';
-        titleElement.append(_get__("strings").ltrim(replaceDoubleEscapes(cleanLabel.substr(0, escMatch.index)), ' '), _get__("$")('mnemonic', {
+        titleElement.append(_get__("strings").ltrim(replaceDoubleEscapes(cleanLabel.substring(0, escMatch.index)), ' '), _get__("$")('mnemonic', {
           'aria-hidden': 'true'
-        }, escMatch[3]), _get__("strings").rtrim(replaceDoubleEscapes(cleanLabel.substr(escMatch.index + escMatch[0].length)), ' '));
+        }, escMatch[3]), _get__("strings").rtrim(replaceDoubleEscapes(cleanLabel.substring(escMatch.index + escMatch[0].length)), ' '));
       } else {
         titleElement.innerText = replaceDoubleEscapes(cleanLabel).trim();
       }
@@ -730,9 +730,6 @@ class MenuBar extends _get__("lifecycle_1").Disposable {
     }
   }
   updateMnemonicVisibility(visible) {
-    console.log({
-      visible
-    });
     if (this.menus) {
       this.menus.forEach(menuBarMenu => {
         if (menuBarMenu.titleElement && menuBarMenu.titleElement.children.length) {
@@ -769,6 +766,10 @@ class MenuBar extends _get__("lifecycle_1").Disposable {
     return this._onFocusStateChange.event;
   }
   onMenuTriggered(menuIndex, clicked) {
+    if (!this.menus[menuIndex].actions) {
+      _get__("electron_1").ipcRenderer.send('menu-event', menuIndex + 1);
+      return;
+    }
     if (this.isOpen) {
       if (this.isCurrentMenu(menuIndex)) {
         this.setUnfocusedState();
@@ -898,8 +899,8 @@ class MenuBar extends _get__("lifecycle_1").Disposable {
     };
   }
 }
-_get__("MenuBar").OVERFLOW_INDEX = -1;
 exports.MenuBar = _get__("MenuBar");
+_get__("MenuBar").OVERFLOW_INDEX = -1;
 function _getGlobalObject() {
   try {
     if (!!global) {
@@ -1019,6 +1020,8 @@ function _get_original__(variableName) {
       return lifecycle_1;
     case "strings":
       return strings;
+    case "electron_1":
+      return electron_1;
     case "keyCodes_1":
       return keyCodes_1;
   }

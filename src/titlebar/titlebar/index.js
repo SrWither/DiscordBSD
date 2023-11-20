@@ -53,7 +53,7 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
       ...this.currentOptions,
       ...options
     };
-    const jWindowIcons = _get__("consts_1").menuIcons[(0, _get__("platform_1").PlatformToString)(_get__("platform_1").platform).toLocaleLowerCase()];
+    const jWindowIcons = _get__("consts_1").menuIcons[(0, _get__("platform_1").PlatformToString)(_get__("platform_1").platform)?.toLocaleLowerCase()];
     this.platformIcons = jWindowIcons;
     this.titlebar = (0, _get__("dom_1").$)('.cet-titlebar');
     this.dragRegion = (0, _get__("dom_1").$)('.cet-drag-region');
@@ -145,7 +145,7 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
     this.icon.firstElementChild.setAttribute('style', `height: ${size}px`);
   }
   setupMenubar() {
-    _get__("electron_1").ipcRenderer.invoke('request-application-menu').then(menu => this.updateMenu(menu));
+    _get__("electron_1").ipcRenderer.invoke('request-application-menu')?.then(menu => this.updateMenu(menu));
     const menuPosition = this.currentOptions.menuPosition;
     if (menuPosition) {
       this.updateMenuPosition(menuPosition);
@@ -172,9 +172,9 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
     const onlyRendererMenuBar = this.currentOptions.onlyShowMenuBar;
     const tooltips = this.currentOptions.tooltips;
     if (_get__("platform_1").isMacintosh || onlyRendererMenuBar) return;
-    this.createControlButton(this.controls.minimize, this.platformIcons.minimize, tooltips.minimize, this.currentOptions.minimizable);
-    this.createControlButton(this.controls.maximize, this.platformIcons.maximize, tooltips.maximize, this.currentOptions.maximizable);
-    this.createControlButton(this.controls.close, this.platformIcons.close, tooltips.close, this.currentOptions.closeable);
+    this.createControlButton(this.controls.minimize, this.platformIcons?.minimize, tooltips.minimize, this.currentOptions.minimizable);
+    this.createControlButton(this.controls.maximize, this.platformIcons?.maximize, tooltips.maximize, this.currentOptions.maximizable);
+    this.createControlButton(this.controls.close, this.platformIcons?.close, tooltips.close, this.currentOptions.closeable);
     (0, _get__("dom_1").append)(this.titlebar, this.controlsContainer);
   }
   setupContainer() {
@@ -190,7 +190,7 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
   setupTitleBar() {
     const order = this.currentOptions.order;
     const hasShadow = this.currentOptions.shadow;
-    (0, _get__("dom_1").addClass)(this.titlebar, `cet-${(0, _get__("platform_1").PlatformToString)(_get__("platform_1").platform).toLocaleLowerCase()}`);
+    (0, _get__("dom_1").addClass)(this.titlebar, `cet-${(0, _get__("platform_1").PlatformToString)(_get__("platform_1").platform)?.toLocaleLowerCase()}`);
     if (order) {
       (0, _get__("dom_1").addClass)(this.titlebar, `cet-${order}`);
     }
@@ -208,6 +208,7 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
     const minimizable = this.currentOptions.minimizable;
     const maximizable = this.currentOptions.maximizable;
     const closeable = this.currentOptions.closeable;
+    this.onDidChangeMaximized(_get__("electron_1").ipcRenderer.sendSync('window-event', 'window-is-maximized'));
     _get__("electron_1").ipcRenderer.on('window-maximize', (_, isMaximized) => this.onDidChangeMaximized(isMaximized));
     _get__("electron_1").ipcRenderer.on('window-fullscreen', (_, isFullScreen) => this.onWindowFullScreen(isFullScreen));
     _get__("electron_1").ipcRenderer.on('window-focus', (_, isFocused) => this.onWindowFocus(isFocused));
@@ -258,7 +259,7 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
     const maximize = this.controls.maximize;
     if (maximize) {
       maximize.title = isMaximized ? this.currentOptions.tooltips?.restoreDown : this.currentOptions.tooltips?.maximize;
-      maximize.innerHTML = isMaximized ? this.platformIcons.restore : this.platformIcons.maximize;
+      maximize.innerHTML = isMaximized ? this.platformIcons?.restore : this.platformIcons?.maximize;
     }
     if (this.resizer) {
       if (isMaximized) (0, _get__("dom_1").hide)(this.resizer.top, this.resizer.left);else (0, _get__("dom_1").show)(this.resizer.top, this.resizer.left);
@@ -284,7 +285,7 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
     }
     const backgroundColor = this.isInactive ? this.currentOptions.backgroundColor?.lighten(0.12) : this.currentOptions.backgroundColor;
     if (backgroundColor) {
-      this.titlebar.style.backgroundColor = backgroundColor.toString();
+      this.titlebar.style.backgroundColor = backgroundColor?.toString();
     }
     let foregroundColor;
     if (backgroundColor?.isLighter()) {
@@ -294,16 +295,26 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
       (0, _get__("dom_1").removeClass)(this.titlebar, 'light');
       foregroundColor = this.isInactive ? _get__("consts_1").INACTIVE_FOREGROUND : _get__("consts_1").ACTIVE_FOREGROUND;
     }
-    this.titlebar.style.color = foregroundColor.toString();
+    this.titlebar.style.color = foregroundColor?.toString();
+    const updatedWindowControls = _get__("electron_1").ipcRenderer.sendSync('update-window-controls', {
+      color: backgroundColor?.toString(),
+      symbolColor: foregroundColor?.toString(),
+      height: _get__("consts_1").TOP_TITLEBAR_HEIGHT_WIN
+    });
+    if (updatedWindowControls) {
+      (0, _get__("dom_1").hide)(this.controlsContainer);
+    } else {
+      (0, _get__("dom_1").show)(this.controlsContainer);
+    }
     if (this.menuBar) {
       let fgColor;
-      const backgroundColor = this.currentOptions.menuBarBackgroundColor ?? this.currentOptions.backgroundColor?.darken(0.12);
+      const backgroundColor = this.currentOptions.menuBarBackgroundColor || this.currentOptions.backgroundColor.darken(0.12);
       const foregroundColor = backgroundColor?.isLighter() ? _get__("consts_1").INACTIVE_FOREGROUND_DARK : _get__("consts_1").INACTIVE_FOREGROUND;
-      const bgColor = !this.currentOptions.itemBackgroundColor || this.currentOptions.itemBackgroundColor.equals(backgroundColor) ? _get__("consts_1").DEFAULT_ITEM_SELECTOR : this.currentOptions.itemBackgroundColor;
-      if (bgColor.equals(_get__("consts_1").DEFAULT_ITEM_SELECTOR)) {
+      const bgColor = this.currentOptions.itemBackgroundColor && !this.currentOptions.itemBackgroundColor.equals(backgroundColor) ? this.currentOptions.itemBackgroundColor : _get__("consts_1").DEFAULT_ITEM_SELECTOR;
+      if (bgColor?.equals(_get__("consts_1").DEFAULT_ITEM_SELECTOR)) {
         fgColor = backgroundColor?.isLighter() ? _get__("consts_1").ACTIVE_FOREGROUND_DARK : _get__("consts_1").ACTIVE_FOREGROUND;
       } else {
-        fgColor = bgColor.isLighter() ? _get__("consts_1").ACTIVE_FOREGROUND_DARK : _get__("consts_1").ACTIVE_FOREGROUND;
+        fgColor = bgColor?.isLighter() ? _get__("consts_1").ACTIVE_FOREGROUND_DARK : _get__("consts_1").ACTIVE_FOREGROUND;
       }
       this.menuBar.setStyles({
         backgroundColor,
@@ -337,6 +348,8 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
    * @param fullscreen Fullscreen state of the window
    */
   onWindowFullScreen(fullscreen) {
+    const height = _get__("platform_1").isMacintosh ? _get__("consts_1").TOP_TITLEBAR_HEIGHT_MAC : _get__("consts_1").TOP_TITLEBAR_HEIGHT_WIN;
+    const hasShadow = this.currentOptions.shadow;
     if (!_get__("platform_1").isMacintosh) {
       if (fullscreen) {
         (0, _get__("dom_1").hide)(this.titlebar);
@@ -344,10 +357,10 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
       } else {
         (0, _get__("dom_1").show)(this.titlebar);
         if (this.currentOptions.menuPosition === 'bottom') {
-          this.container.style.top = _get__("consts_1").BOTTOM_TITLEBAR_HEIGHT;
-          this.controlsContainer.style.height = _get__("consts_1").TOP_TITLEBAR_HEIGHT_WIN;
+          this.container.style.top = (0, _get__("consts_1").getPx)(_get__("consts_1").BOTTOM_TITLEBAR_HEIGHT);
+          this.controlsContainer.style.height = (0, _get__("consts_1").getPx)(_get__("consts_1").TOP_TITLEBAR_HEIGHT_WIN);
         } else {
-          this.container.style.top = _get__("platform_1").isMacintosh ? _get__("consts_1").TOP_TITLEBAR_HEIGHT_MAC : _get__("consts_1").TOP_TITLEBAR_HEIGHT_WIN;
+          this.container.style.top = (0, _get__("consts_1").getPx)(height + (hasShadow ? 1 : 0));
         }
       }
     }
@@ -399,13 +412,13 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
       (0, _get__("dom_1").removeClass)(this.title, 'cet-title-right');
       (0, _get__("dom_1").removeClass)(this.title, 'cet-title-center');
       if (menuPosition !== 'bottom') {
-        /* addDisposableListener(window, 'resize', () => {
-            if (window.innerWidth >= 1188) {
-                addClass(this.title, 'cet-title-center')
-            } else {
-                removeClass(this.title, 'cet-title-center')
-            }
-        }) */
+        (0, _get__("dom_1").addDisposableListener)(window, 'resize', () => {
+          if (window.innerWidth >= 1188) {
+            (0, _get__("dom_1").addClass)(this.title, 'cet-title-center');
+          } else {
+            (0, _get__("dom_1").removeClass)(this.title, 'cet-title-center');
+          }
+        });
         (0, _get__("dom_1").addClass)(this.title, 'cet-title-center');
       }
       if (!_get__("platform_1").isMacintosh && order === 'first-buttons') {
@@ -420,8 +433,9 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
    * @param backgroundColor The color for the background
    */
   updateBackground(backgroundColor) {
+    if (typeof backgroundColor === 'string') backgroundColor = _get__("color_1").Color.fromHex(backgroundColor);
     this.currentOptions.backgroundColor = backgroundColor;
-    // this.updateStyles()
+    this.updateStyles();
     return this;
   }
   /**
@@ -429,8 +443,9 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
    * @param itemBGColor The color for the item background
    */
   updateItemBGColor(itemBGColor) {
+    if (typeof itemBGColor === 'string') itemBGColor = _get__("color_1").Color.fromHex(itemBGColor);
     this.currentOptions.itemBackgroundColor = itemBGColor;
-    // this._updateStyles()
+    this.updateStyles();
     return this;
   }
   /**
@@ -449,15 +464,16 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
   updateMenuPosition(menuPosition) {
     const height = _get__("platform_1").isMacintosh ? _get__("consts_1").TOP_TITLEBAR_HEIGHT_MAC : _get__("consts_1").TOP_TITLEBAR_HEIGHT_WIN;
     const onlyRendererMenuBar = this.currentOptions.onlyShowMenuBar;
+    const hasShadow = this.currentOptions.shadow;
     this.currentOptions.menuPosition = menuPosition;
     if (menuPosition === 'left' || onlyRendererMenuBar) {
-      this.titlebar.style.height = height;
-      this.container.style.top = height;
+      this.titlebar.style.height = (0, _get__("consts_1").getPx)(height + (hasShadow ? 1 : 0));
+      this.container.style.top = (0, _get__("consts_1").getPx)(height + (hasShadow ? 1 : 0));
       (0, _get__("dom_1").removeClass)(this.menuBarContainer, 'bottom');
     } else {
-      this.titlebar.style.height = _get__("consts_1").BOTTOM_TITLEBAR_HEIGHT;
-      this.container.style.top = _get__("consts_1").BOTTOM_TITLEBAR_HEIGHT;
-      this.controlsContainer.style.height = height;
+      this.titlebar.style.height = (0, _get__("consts_1").getPx)(_get__("consts_1").BOTTOM_TITLEBAR_HEIGHT);
+      this.container.style.top = (0, _get__("consts_1").getPx)(_get__("consts_1").BOTTOM_TITLEBAR_HEIGHT);
+      this.controlsContainer.style.height = (0, _get__("consts_1").getPx)(height);
       (0, _get__("dom_1").addClass)(this.menuBarContainer, 'bottom');
     }
     return this;
@@ -470,6 +486,18 @@ class CustomTitlebar extends _get__("themebar_1").ThemeBar {
     this.titlebar.remove();
     while (this.container.firstChild) (0, _get__("dom_1").append)(document.body, this.container.firstChild);
     this.container.remove();
+  }
+  get titlebarElement() {
+    return this.titlebar;
+  }
+  get menubarElement() {
+    return this.menuBar;
+  }
+  get containerElement() {
+    return this.container;
+  }
+  get titleElement() {
+    return this.title;
   }
 }
 exports.CustomTitlebar = _get__("CustomTitlebar");

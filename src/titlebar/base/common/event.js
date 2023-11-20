@@ -298,7 +298,7 @@ var Event;
     return new Promise(c => once(event)(c));
   }
   Event.toPromise = toPromise;
-})(_assign__("Event", exports.Event || (exports.Event = {})));
+})(_get__("Event") || (exports.Event = _assign__("Event", {})));
 let _globalLeakWarningThreshold = -1;
 function setGlobalLeakWarningThreshold(n) {
   const oldValue = _get__("_globalLeakWarningThreshold");
@@ -479,8 +479,8 @@ class Emitter {
     this._disposed = true;
   }
 }
-_get__("Emitter")._noop = function () {};
 exports.Emitter = _get__("Emitter");
+_get__("Emitter")._noop = function () {};
 class AsyncEmitter extends _get__("Emitter") {
   async fireAsync(eventFn) {
     if (!this._listeners) {

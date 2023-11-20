@@ -3,7 +3,7 @@ An attempt at a native discord client for FreeBSD.
 
 ### Dependencies:
 ```
-pkg install electron25
+pkg install electron27
 pkg install node18
 pkg install npm-node18
 ```
@@ -50,4 +50,3 @@ _you have to activate them there_
 
 ### Splash Screen
 ![Boot](https://user-images.githubusercontent.com/59105868/133003303-f491b628-0c66-4449-94f6-ed9d7f8d4f8a.gif)
-

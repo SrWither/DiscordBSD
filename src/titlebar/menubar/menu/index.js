@@ -13,7 +13,6 @@ const lifecycle_1 = require("../../base/common/lifecycle");
 const item_1 = require("./item");
 const keyCodes_1 = require("../../base/common/keyCodes");
 const keyboardEvent_1 = require("../../base/browser/keyboardEvent");
-const color_1 = require("../../base/common/color");
 const event_1 = require("../../base/common/event");
 const separator_1 = require("./separator");
 const submenu_1 = require("./submenu");
@@ -22,7 +21,7 @@ var Direction;
 (function (Direction) {
   Direction[Direction["Right"] = 0] = "Right";
   Direction[Direction["Left"] = 1] = "Left";
-})(_assign__("Direction", exports.Direction || (exports.Direction = {})));
+})(_get__("Direction") || (exports.Direction = _assign__("Direction", {})));
 class CETMenu extends _get__("lifecycle_1").Disposable {
   constructor(menuContainer, menuIcons, parentOptions, currentOptions, closeSubMenu = () => {}) {
     super();
@@ -339,8 +338,7 @@ class CETMenu extends _get__("lifecycle_1").Disposable {
       if (transparency < 0) transparency = 0;
       if (transparency > 1) transparency = 1;
       const rgba = style.backgroundColor?.rgba;
-      const color = new (_get__("color_1").Color)(new (_get__("color_1").RGBA)(rgba.r, rgba.g, rgba.b, 1 - transparency));
-      container.style.backgroundColor = color.toString();
+      container.style.backgroundColor = `rgb(${rgba.r} ${rgba.g} ${rgba.b} / ${1 - transparency})`;
     }
     if (this.items) {
       this.items.forEach(item => {
@@ -467,8 +465,6 @@ function _get_original__(variableName) {
       return separator_1;
     case "item_1":
       return item_1;
-    case "color_1":
-      return color_1;
     case "lifecycle_1":
       return lifecycle_1;
     case "CETMenu":

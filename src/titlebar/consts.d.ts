@@ -6,9 +6,9 @@ export declare const INACTIVE_FOREGROUND: Color;
 export declare const ACTIVE_FOREGROUND: Color;
 export declare const DEFAULT_ITEM_SELECTOR: Color;
 export declare const IS_MAC_BIGSUR_OR_LATER: boolean;
-export declare const BOTTOM_TITLEBAR_HEIGHT = "60px";
-export declare const TOP_TITLEBAR_HEIGHT_MAC: string;
-export declare const TOP_TITLEBAR_HEIGHT_WIN = "32px";
+export declare const BOTTOM_TITLEBAR_HEIGHT = 60;
+export declare const TOP_TITLEBAR_HEIGHT_MAC: number;
+export declare const TOP_TITLEBAR_HEIGHT_WIN = 30;
 export declare const WINDOW_MIN_WIDTH = 400;
 export declare const WINDOW_MIN_HEIGHT = 270;
 export declare const MENU_MNEMONIC_REGEX: RegExp;
@@ -34,6 +34,7 @@ interface ITitlebarIcons extends IMenuIcons {
     };
 }
 export declare const menuIcons: ITitlebarIcons;
+export declare function getPx(value: number): string;
 /**
  * Handles mnemonics for menu items. Depending on OS:
  * - Windows: Supported via & character (replace && with &)

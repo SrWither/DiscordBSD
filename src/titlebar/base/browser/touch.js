@@ -50,7 +50,7 @@ var EventType;
   EventType.Start = '-monaco-gesturestart';
   EventType.End = '-monaco-gesturesend';
   EventType.Contextmenu = '-monaco-gesturecontextmenu';
-})(_assign__("EventType", exports.EventType || (exports.EventType = {})));
+})(_get__("EventType") || (exports.EventType = _assign__("EventType", {})));
 class Gesture extends _get__("lifecycle_1").Disposable {
   constructor() {
     super();
@@ -250,10 +250,10 @@ class Gesture extends _get__("lifecycle_1").Disposable {
     }
   }
 }
+exports.Gesture = _get__("Gesture");
 _get__("Gesture").SCROLL_FRICTION = -0.005;
 _get__("Gesture").HOLD_DELAY = 700;
 _get__("Gesture").CLEAR_TAP_COUNT_TIME = 400; // ms
-exports.Gesture = _get__("Gesture");
 function _getGlobalObject() {
   try {
     if (!!global) {

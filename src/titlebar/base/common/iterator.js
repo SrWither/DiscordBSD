@@ -94,7 +94,7 @@ var Iterator;
     return result;
   }
   Iterator.collect = collect;
-})(_assign__("Iterator", exports.Iterator || (exports.Iterator = {})));
+})(_get__("Iterator") || (exports.Iterator = _assign__("Iterator", {})));
 function getSequenceIterator(arg) {
   if (Array.isArray(arg)) {
     return _get__("Iterator").fromArray(arg);

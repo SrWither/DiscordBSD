@@ -210,9 +210,7 @@ class StandardKeyboardEvent {
     this.metaKey = this.metaKey || this.keyCode === 57 /* KeyCode.Meta */;
     this._asKeybinding = this._computeKeybinding();
     this._asRuntimeKeybinding = this._computeRuntimeKeybinding();
-    // console.log(`code: ${e.code}, keyCode: ${e.keyCode}, key: ${e.key}`);
   }
-
   preventDefault() {
     if (this.browserEvent && this.browserEvent.preventDefault) {
       this.browserEvent.preventDefault();

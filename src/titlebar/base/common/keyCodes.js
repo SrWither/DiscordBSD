@@ -176,7 +176,7 @@ var KeyCodeUtils;
     return _get__("userSettingsUSMap").strToKeyCode(key) || _get__("userSettingsGeneralMap").strToKeyCode(key);
   }
   KeyCodeUtils.fromUserSettings = fromUserSettings;
-})(_assign__("KeyCodeUtils", exports.KeyCodeUtils || (exports.KeyCodeUtils = {})));
+})(_get__("KeyCodeUtils") || (exports.KeyCodeUtils = _assign__("KeyCodeUtils", {})));
 function KeyChord(firstPart, secondPart) {
   const chordPart = (secondPart & 0x0000FFFF) << 16 >>> 0;
   return (firstPart | chordPart) >>> 0;

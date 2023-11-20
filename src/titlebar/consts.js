@@ -7,7 +7,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loadWindowIcons = exports.applyFill = exports.parseAccelerator = exports.cleanMnemonic = exports.mnemonicButtonLabel = exports.mnemonicMenuLabel = exports.menuIcons = exports.MENU_ESCAPED_MNEMONIC_REGEX = exports.MENU_MNEMONIC_REGEX = exports.WINDOW_MIN_HEIGHT = exports.WINDOW_MIN_WIDTH = exports.TOP_TITLEBAR_HEIGHT_WIN = exports.TOP_TITLEBAR_HEIGHT_MAC = exports.BOTTOM_TITLEBAR_HEIGHT = exports.IS_MAC_BIGSUR_OR_LATER = exports.DEFAULT_ITEM_SELECTOR = exports.ACTIVE_FOREGROUND = exports.INACTIVE_FOREGROUND = exports.ACTIVE_FOREGROUND_DARK = exports.INACTIVE_FOREGROUND_DARK = void 0;
+exports.loadWindowIcons = exports.applyFill = exports.parseAccelerator = exports.cleanMnemonic = exports.mnemonicButtonLabel = exports.mnemonicMenuLabel = exports.getPx = exports.menuIcons = exports.MENU_ESCAPED_MNEMONIC_REGEX = exports.MENU_MNEMONIC_REGEX = exports.WINDOW_MIN_HEIGHT = exports.WINDOW_MIN_WIDTH = exports.TOP_TITLEBAR_HEIGHT_WIN = exports.TOP_TITLEBAR_HEIGHT_MAC = exports.BOTTOM_TITLEBAR_HEIGHT = exports.IS_MAC_BIGSUR_OR_LATER = exports.DEFAULT_ITEM_SELECTOR = exports.ACTIVE_FOREGROUND = exports.INACTIVE_FOREGROUND = exports.ACTIVE_FOREGROUND_DARK = exports.INACTIVE_FOREGROUND_DARK = void 0;
 const color_1 = require("./base/common/color");
 const platform_1 = require("./base/common/platform");
 exports.INACTIVE_FOREGROUND_DARK = _get__("color_1").Color.fromHex('#222222');
@@ -16,9 +16,9 @@ exports.INACTIVE_FOREGROUND = _get__("color_1").Color.fromHex('#EEEEEE');
 exports.ACTIVE_FOREGROUND = _get__("color_1").Color.fromHex('#FFFFFF');
 exports.DEFAULT_ITEM_SELECTOR = _get__("color_1").Color.fromHex('#0000001F');
 exports.IS_MAC_BIGSUR_OR_LATER = _get__("platform_1").isMacintosh && parseInt(process.getSystemVersion().split('.')[0]) >= 11;
-exports.BOTTOM_TITLEBAR_HEIGHT = '60px';
-exports.TOP_TITLEBAR_HEIGHT_MAC = exports.IS_MAC_BIGSUR_OR_LATER ? '28px' : '22px';
-exports.TOP_TITLEBAR_HEIGHT_WIN = '32px';
+exports.BOTTOM_TITLEBAR_HEIGHT = 60;
+exports.TOP_TITLEBAR_HEIGHT_MAC = exports.IS_MAC_BIGSUR_OR_LATER ? 28 : 22;
+exports.TOP_TITLEBAR_HEIGHT_WIN = 30;
 exports.WINDOW_MIN_WIDTH = 400;
 exports.WINDOW_MIN_HEIGHT = 270;
 exports.MENU_MNEMONIC_REGEX = /\(&([^\s&])\)|(^|[^&])&([^\s&])/;
@@ -47,6 +47,10 @@ exports.menuIcons = {
     close: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11"><path d="M6.279 5.5L11 10.221l-.779.779L5.5 6.279.779 11 0 10.221 4.721 5.5 0 .779.779 0 5.5 4.721 10.221 0 11 .779 6.279 5.5z"/></svg>'
   }
 };
+function getPx(value) {
+  return `${value}px`;
+}
+exports.getPx = _get__("getPx");
 /**
  * Handles mnemonics for menu items. Depending on OS:
  * - Windows: Supported via & character (replace && with &)
@@ -205,6 +209,8 @@ function _get_original__(variableName) {
       return color_1;
     case "platform_1":
       return platform_1;
+    case "getPx":
+      return getPx;
     case "mnemonicMenuLabel":
       return mnemonicMenuLabel;
     case "mnemonicButtonLabel":

@@ -1,4 +1,5 @@
 import { Color } from '../base/common/color';
+import { MenuBar } from '../menubar';
 import { TitleBarOptions } from './options';
 import { ThemeBar } from './themebar';
 export declare class CustomTitlebar extends ThemeBar {
@@ -96,4 +97,8 @@ export declare class CustomTitlebar extends ThemeBar {
      * Remove the titlebar, menubar and all methods.
      */
     dispose(): void;
+    get titlebarElement(): HTMLElement;
+    get menubarElement(): MenuBar | undefined;
+    get containerElement(): HTMLElement;
+    get titleElement(): HTMLElement;
 }

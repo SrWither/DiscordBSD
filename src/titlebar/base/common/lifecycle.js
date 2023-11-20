@@ -65,10 +65,10 @@ class Disposable {
     return t;
   }
 }
+exports.Disposable = _get__("Disposable");
 _get__("Disposable").None = Object.freeze({
   dispose() {}
 });
-exports.Disposable = _get__("Disposable");
 function _getGlobalObject() {
   try {
     if (!!global) {

@@ -4,22 +4,15 @@
  *  Copyright (c) AlexTorresDev. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
-function getMenuItemByCommandId(commandId, menu) {
-  if (!menu) return undefined;
-  for (const item of menu.items) {
-    if (item.submenu) {
-      const submenuItem = _get__("getMenuItemByCommandId")(commandId, item.submenu);
-      if (submenuItem) return submenuItem;
-    } else if (item.commandId === commandId) return item;
-  }
-  return undefined;
-}
-module.exports = () => {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = () => {
   if (process.type !== 'browser') return;
   const {
     BrowserWindow,
-    nativeImage,
     Menu,
+    MenuItem,
     ipcMain
   } = require('electron');
   // Send menu to renderer title bar process
@@ -27,6 +20,7 @@ module.exports = () => {
   // Handle window events
   ipcMain.on('window-event', (event, eventName) => {
     const window = BrowserWindow.fromWebContents(event.sender);
+    /* eslint-disable indent */
     if (window) {
       switch (eventName) {
         case 'window-minimize':
@@ -60,7 +54,26 @@ module.exports = () => {
       event.returnValue = null;
     }
   });
+  ipcMain.on('update-window-controls', (event, args) => {
+    const window = BrowserWindow.fromWebContents(event.sender);
+    try {
+      if (window) window.setTitleBarOverlay(args);
+      event.returnValue = true;
+    } catch (_) {
+      event.returnValue = false;
+    }
+  });
 };
+function getMenuItemByCommandId(commandId, menu) {
+  if (!menu) return undefined;
+  for (const item of menu.items) {
+    if (item.submenu) {
+      const submenuItem = _get__("getMenuItemByCommandId")(commandId, item.submenu);
+      if (submenuItem) return submenuItem;
+    } else if (item.commandId === commandId) return item;
+  }
+  return undefined;
+}
 function _getGlobalObject() {
   try {
     if (!!global) {

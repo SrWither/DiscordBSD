@@ -1,4 +1,3 @@
-import { Menu } from 'electron';
 import { Color } from '../base/common/color';
 export interface MenuBarOptions {
     /**
@@ -15,13 +14,6 @@ export interface MenuBarOptions {
      * **The default is undefined**
      */
     itemBackgroundColor?: Color;
-    /**
-     * @deprecated Use `setupTitlebar` method instead.
-     * The menu to show in the title bar.
-     * You can use `Menu` or not add this option and the menu created in the main process will be taken.
-     * **The default menu is undefined**
-     */
-    menu?: Menu;
     /**
      * The background color of the menu.
      * **The default is automatic**
