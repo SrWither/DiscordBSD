@@ -2,6 +2,11 @@
 
 echo "Installing DiscordBSD"
 
+if [ -d ~/.local/share/discordbsd ]; then
+    echo "Removing old installation..."
+    rm -rf ~/.local/share/discordbsd
+fi
+
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/share/discordbsd
 mkdir -p ~/.local/share/applications
