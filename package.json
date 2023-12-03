@@ -27,7 +27,7 @@
           {
             "name": "@electron-forge/maker-zip",
             "platforms": [
-              "linux"
+              "freebsd"
             ]
           }
         ],
