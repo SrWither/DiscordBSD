@@ -21,10 +21,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.4.2",
+    "@types/node": "^20.9.2",
     "copyfiles": "^2.4.1",
-    "electron": "^25.3.0",
-    "electron-builder": "^24.4.0",
-    "typescript": "^5.1.6"
+    "electron-builder": "^24.6.4",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "electron": "^27.1.0"
   }
 }
