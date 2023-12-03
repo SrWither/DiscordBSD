@@ -18,7 +18,7 @@ SUB_FILES=	${PORTNAME}
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1689623431
+PREFETCH_TIMESTAMP=	1701567897
 # ELECTRON_MAKE_FLAGS+=	--config electron-builder.yaml
 
 pre-build:
