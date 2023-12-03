@@ -1,5 +1,5 @@
-TIMESTAMP = 1701573239
+TIMESTAMP = 1701614426
 SHA256 (discordbsd--node-modules.tar.gz) = 433c3aceeccf2548955421990c0dbb100b1ca6476b5891c2bc1f4c33101b88b7
 SIZE (discordbsd--node-modules.tar.gz) = 89696205
-SHA256 (SrWither-DiscordBSD--main_GH0.tar.gz) = 3814a12ce786d849d5c926baa8f6254592a8e0f17640d89ca22f19106380cfdc
-SIZE (SrWither-DiscordBSD--main_GH0.tar.gz) = 482333
+SHA256 (SrWither-DiscordBSD--main_GH0.tar.gz) = 4992089c4a38a221faeec78d6966e5401ea78ae584b7a5b4916222a255533c26
+SIZE (SrWither-DiscordBSD--main_GH0.tar.gz) = 482378
