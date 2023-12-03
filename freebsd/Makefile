@@ -16,7 +16,7 @@ GH_TAGNAME=	main
 
 SUB_FILES=	${PORTNAME}
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:forge
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1701567897
 # ELECTRON_MAKE_FLAGS+=	--config electron-builder.yaml
