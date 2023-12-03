@@ -4,21 +4,29 @@ let Dispatcher, lookupAsset, lookupApp, apps = {};
 const ws = new WebSocket('ws://127.0.0.1:1337'); // connect to arRPC bridge websocket
 ws.onmessage = async x => {
   msg = JSON.parse(x.data);
-  console.log(msg);
 
   if (!Dispatcher) {
-    const wpRequire = window.webpackChunkdiscord_app.push([[ Symbol() ], {}, x => x]);
-    const cache = wpRequire.c;
+    let wpRequire;
+    window.webpackChunkdiscord_app.push([[ Symbol() ], {}, x => wpRequire = x]);
     window.webpackChunkdiscord_app.pop();
 
-    for (const id in cache) {
-      let mod = cache[id].exports;
-      mod = mod && (mod.Z ?? mod.ZP);
+    const modules = wpRequire.c;
 
-      if (mod && mod.register && mod.wait) {
-        Dispatcher = mod;
-        break;
+    for (const id in modules) {
+      const mod = modules[id].exports;
+      if (!mod?.__esModule) continue;
+
+      for (const prop in mod) {
+        if (!mod.hasOwnProperty(prop)) continue;
+
+        const candidate = mod[prop];
+        if (candidate && candidate.register && candidate.wait) {
+          Dispatcher = candidate;
+          break;
+        }
       }
+
+      if (Dispatcher) break;
     }
 
     const factories = wpRequire.m;
@@ -26,26 +34,32 @@ ws.onmessage = async x => {
       if (factories[id].toString().includes('getAssetImage: size must === [number, number] for Twitch')) {
         const mod = wpRequire(id);
 
-        const _lookupAsset = Object.values(mod).find(e => typeof e === "function" && e.toString().includes("apply("));
-        lookupAsset = async (appId, name) => (await _lookupAsset(appId, [ name, undefined ]))[0];
-
-        break;
+        // fetchAssetIds
+        const _lookupAsset = Object.values(mod).find(e => typeof e === 'function' && e.toString().includes('APPLICATION_ASSETS_FETCH_SUCCESS'));
+        if (_lookupAsset) lookupAsset = async (appId, name) => (await _lookupAsset(appId, [ name, undefined ]))[0];
       }
+
+      if (lookupAsset) break;
     }
 
     for (const id in factories) {
-      if (factories[id].toString().includes(`e.application={`)) {
+      if (factories[id].toString().includes('APPLICATION_RPC(')) {
         const mod = wpRequire(id);
 
-        const _lookupApp = Object.values(mod).find(e => typeof e === "function" && e.toString().includes(`e.application={`));
-        lookupApp = async appId => {
+        // fetchApplicationsRPC
+        const _lookupApp = Object.values(mod).find(e => {
+          if (typeof e !== 'function') return;
+          const str = e.toString();
+          return str.includes(',coverImage:') && str.includes('INVALID_ORIGIN');
+        });
+        if (_lookupApp) lookupApp = async appId => {
           let socket = {};
           await _lookupApp(socket, appId);
           return socket.application;
         };
-
-        break;
       }
+
+      if (lookupApp) break;
     }
   }
 
@@ -60,6 +74,6 @@ ws.onmessage = async x => {
     if (!msg.activity.name) msg.activity.name = app.name;
   }
 
-  Dispatcher.dispatch({ type: "LOCAL_ACTIVITY_UPDATE", ...msg }); // set RPC status
+  Dispatcher.dispatch({ type: 'LOCAL_ACTIVITY_UPDATE', ...msg }); // set RPC status
 };
 })();
