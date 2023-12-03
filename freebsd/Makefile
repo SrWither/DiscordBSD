@@ -23,7 +23,7 @@ PREFETCH_TIMESTAMP=	1701567897
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
-
+	echo ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
