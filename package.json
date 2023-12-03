@@ -59,8 +59,5 @@
     "electron-builder": "24.4.0",
     "typescript": "^5.2.2",
     "electron": "27.1.2"
-  },
-  "dependencies": {
-    "electron": "27.1.2"
   }
 }
