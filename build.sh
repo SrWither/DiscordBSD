@@ -32,11 +32,12 @@ cd ..
 cd freebsd
 $discordbsd_perms_command make makesum
 $discordbsd_perms_command make
+$discordbsd_perms_command  chmod -R 755 ./work/DiscordBSD-main/out/DiscordBSD-linux-x64/
 cd ..
 
 # move files
 mkdir -p share/discordbsd
 cp -r RPC share/discordbsd
-cp -r freebsd/work/DiscordBSD-main/dist/linux-unpacked share/discordbsd/discord
+cp -r freebsd/work/DiscordBSD-main/out/DiscordBSD-linux-x64 share/discordbsd/discord
 
 echo "Done!"

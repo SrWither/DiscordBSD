@@ -2,5 +2,5 @@
 
 cd ~/.local/share/discordbsd
 node RPC/src &
-./discord/discordbsd
+./discord/DiscordBSD
 kill `pgrep -P $$`
