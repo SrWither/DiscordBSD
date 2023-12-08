@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags for character set and viewport -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Link to the Coloris CSS library -->
+    <link rel="stylesheet" href="../css/coloris.min.css" />
+
+    <!-- Page title -->
+    <title>DiscordBSD Settings</title>
+  </head>
+
+  <body>
+    <!-- Container for DiscordBSD settings -->
+    <div class="settings-container">
+      <!-- Checkbox for custom title bar -->
+      <div class="checkbox-container">
+        <input type="checkbox" id="titlebar" class="checkbox-input" />
+        <label for="titlebar" class="checkbox-label">Custom TitleBar</label>
+      </div>
+
+      <!-- Container for color picker -->
+      <div class="color-picker-container">
+        <div class="circle">
+          <!-- Input for color selection using Coloris library -->
+          <input
+            id="titlebar-color"
+            type="text"
+            class="coloris color-picker"
+            data-coloris
+          />
+        </div>
+
+        <a onclick="saveConfig()" class="button apply"> Apply </a>
+        <p style="font-size: 0.8rem">you have to restart to see the changes</p>
+      </div>
+    </div>
+
+    <!-- Script tag for Coloris JavaScript library -->
+    <script src="../js/coloris.min.js"></script>
+
+    <!-- JavaScript to initialize Coloris with specific options -->
+    <script>
+      Coloris.setInstance(".color-picker", {
+        theme: "pill",
+        themeMode: "dark",
+        alpha: false,
+        swatches: [
+          "#6538b9",
+          "#067bc2",
+          "#84bcda",
+          "#80e377",
+          "#ecc30b",
+          "#f37748",
+          "#d56062",
+        ],
+      });
+
+      // Save config
+      function saveConfig() {
+        const titlebarCheckbox = document.getElementById("titlebar");
+        const titlebarValue = titlebarCheckbox.checked;
+
+        const titlebarColorInput = document.getElementById("titlebar-color");
+        const titlebarColorValue = titlebarColorInput.value;
+
+        const configData = {
+          titlebar: titlebarValue,
+          titlebarcolor: titlebarColorValue,
+        };
+
+        console.log(configData);
+        window.dbsdsettings.setConfig(configData);
+      }
+
+      async function loadConfig() {
+        let config = await window.dbsdsettings.getConfig();
+
+        const titlebarCheckbox = document.getElementById("titlebar");
+        titlebarCheckbox.checked = config.titlebar;
+
+        const titlebarColorInput = document.getElementById("titlebar-color");
+        titlebarColorInput.value = config.titlebarcolor;
+      }
+
+      window.addEventListener("DOMContentLoaded", function (_event) {
+        loadConfig();
+
+        setTimeout(function () {
+          document
+            .querySelector("#titlebar-color")
+            .dispatchEvent(new Event("input", { bubbles: true }));
+        }, 1);
+      });
+    </script>
+  </body>
+
+  <style>
+    /* Global CSS reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styles */
+    body {
+      background-color: #36393f;
+      color: #ffffff;
+      font-family: "Helvetica Neue", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* Input styles */
+    input {
+      width: 150px;
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      box-sizing: border-box;
+    }
+
+    /* Text input styles */
+    input[type="text"] {
+      background-color: #36393f;
+      color: #ffffff;
+      padding: 5px;
+      border: 1px solid #36393f;
+      border-radius: 3px;
+    }
+
+    .apply {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Styles specific to Coloris library */
+    .circle .clr-field button {
+      width: 22px;
+      height: 22px;
+      left: 5px;
+      right: auto;
+      border-radius: 5px;
+    }
+
+    .circle .clr-field input {
+      padding-left: 36px;
+    }
+
+    .circle .clr-field button {
+      border-radius: 50%;
+    }
+
+    /* Container for DiscordBSD settings */
+    .settings-container {
+      background-color: #2f3136;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    /* Container for checkbox */
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    /* Label for checkbox */
+    .checkbox-label {
+      margin-left: 10px;
+      font-size: 16px;
+    }
+
+    /* Checkbox styles */
+    .checkbox-input {
+      margin-right: 5px;
+      -webkit-appearance: none;
+      appearance: none;
+      border: 2px solid #7289da;
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Checked state styles for checkbox */
+    .checkbox-input:checked {
+      background-color: #7289da;
+    }
+
+    .checkbox-input:checked::before {
+      content: "\2713";
+      font-size: 12px;
+      color: #ffffff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Styles for hyperlinks */
+    a {
+      color: #7289da;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .button {
+      background-color: #7289da;
+      color: #ffffff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #677bc4;
+      text-decoration: none;
+    }
+
+    .button:active {
+      background-color: #556a8c;
+    }
+    /* Container for color picker */
+    .color-picker-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    /* Label for color picker */
+    .color-picker-label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    /* Input for color picker */
+    .color-picker-input {
+      width: 50px;
+    }
+  </style>
+</html>

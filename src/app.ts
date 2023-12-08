@@ -1,13 +1,18 @@
 import { BrowserWindow, Menu, Tray, nativeImage, shell, ipcMain, desktopCapturer } from "electron";
 import { Splash } from "./splash";
+import { DiscordSettings, getConfig } from "./settings";
 import { setupTitlebar, attachTitlebarToWindow } from "./titlebar/main";
 import { screenshareScript } from "./preload/screenshare"
 import * as path from "path";
 import * as fs from "fs";
 import * as os from "os";
 
+const titlebarIsEnabled = getConfig().titlebar
+
 Menu.setApplicationMenu(null);
-setupTitlebar();
+if(titlebarIsEnabled) {
+  setupTitlebar();
+}
 
 export class MainApp {
   private win: BrowserWindow;
@@ -49,6 +54,12 @@ export class MainApp {
         },
       },
       {
+        label: "Settings",
+        click: () => {
+          new DiscordSettings().show();
+        },
+      },
+      {
         label: "Quit",
         click: () => {
           this.win.destroy();
@@ -73,8 +84,8 @@ export class MainApp {
       height: 720,
       show: false,
       icon: this.icons.main,
-      titleBarStyle: "hidden",
-      frame: false,
+      titleBarStyle: titlebarIsEnabled ? "hidden" : "default",
+      frame: !titlebarIsEnabled,
       webPreferences: {
         sandbox: false,
         preload: path.join(__dirname, "preload/preload.js"),
@@ -82,7 +93,9 @@ export class MainApp {
     });
     this.win.webContents.setUserAgent(this.userAgent);
     this.win.loadURL("https://discord.com/app");
-    attachTitlebarToWindow(this.win);
+    if(titlebarIsEnabled) {
+      attachTitlebarToWindow(this.win);
+    }
   }
 
   /**
