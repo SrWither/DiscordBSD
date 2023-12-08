@@ -17,7 +17,8 @@ export interface ConfigData {
  * configure DiscordBSD settings.
  */
 export class DiscordSettings {
-  private win: BrowserWindow;
+  private static instance: DiscordSettings | null = null;
+  private win: BrowserWindow | null = null;
 
   /**
    * Create a new DiscordSettings instance.
@@ -26,21 +27,16 @@ export class DiscordSettings {
    * configuration data.
    */
   constructor() {
-    this.win = new BrowserWindow({
-      title : "DiscordBSD Settings",
-      width : 640,
-      height : 480,
-      alwaysOnTop : true,
-      webPreferences : {
-        sandbox : false,
-        preload : path.join(__dirname, "preload/settingspl.js"),
-      },
-    });
-
+    this.createWindow()
     // Load HTML file for settings window
     this.win.loadFile(path.join(__dirname, "assets/web/html/settings.html"));
 
-    this.win.on("closed", () => { this.unregisterIpcHandlers(); });
+    if (this.win) {
+      this.win.on("closed", () => {
+        this.unregisterIpcHandlers();
+        this.win = null;
+      });
+    }
 
     // Event handler for setting configuration data
     ipcMain.on("set-config",
@@ -53,25 +49,57 @@ export class DiscordSettings {
     });
   }
 
+  private createWindow() {
+    this.win = new BrowserWindow({
+      title : "DiscordBSD Settings",
+      width : 640,
+      height : 480,
+      alwaysOnTop : true,
+      webPreferences : {
+        sandbox : false,
+        preload : path.join(__dirname, "preload/settingspl.js"),
+      },
+    });
+
+    if (this.win) {
+      this.win.on("closed", () => {
+        this.unregisterIpcHandlers();
+        this.win = null;
+      });
+    }
+  }
+
   private unregisterIpcHandlers() {
     // Desvincular los event listeners para evitar pérdida de memoria
     ipcMain.removeHandler("get-config");
     ipcMain.removeHandler("set-config");
   }
 
+  public static getInstance() {
+    if (!DiscordSettings.instance || !DiscordSettings.instance.win) {
+      DiscordSettings.instance = new DiscordSettings();
+    }
+    return DiscordSettings.instance;
+  }
   /**
    * Show the DiscordBSD settings window.
    * This method displays the window that allows users to configure DiscordBSD
    * settings.
    */
-  public show() { this.win.show(); }
-
+  public show() {
+    if (!this.win) {
+      this.createWindow();
+    }
+    this.win?.show();
+  }
   /**
    * Close and destroy the DiscordBSD settings window.
    * This method closes and destroys the window used for configuring DiscordBSD
    * settings.
    */
-  public close() { this.win.destroy(); }
+  public close() {
+    this.win?.destroy();
+  }
 }
 
 /**

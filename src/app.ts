@@ -56,7 +56,8 @@ export class MainApp {
       {
         label: "Settings",
         click: () => {
-          new DiscordSettings().show();
+          const settings = DiscordSettings.getInstance();
+          settings.show();
         },
       },
       {
