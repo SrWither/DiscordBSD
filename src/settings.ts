@@ -133,6 +133,10 @@ export const getConfig = (): ConfigData|null => {
 };
 
 export const initializeConfig = () => {
+  if (!fs.existsSync(configPath)) {
+    fs.mkdirSync(configPath, { recursive: true });
+  }
+
   if (!fs.existsSync(filePath)) {
     const initialData: ConfigData = {
       titlebar : false,
