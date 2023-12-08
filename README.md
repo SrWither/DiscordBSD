@@ -32,8 +32,11 @@ if everything compiled without errors, run the `install.sh` script.
 ![image](https://github.com/SrWither/DiscordBSD/assets/59105868/d4934fc8-e169-4e6c-8a1e-01b1f90dc203)
 _the color scheme is from discord nitro_
 
+#### You can customize the titlebar
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/dd67be06-11fd-4004-b2d8-455d548a6977)
+
 ### System tray
-![image](https://github.com/SrWither/DiscordBSD/assets/59105868/f0bf9be8-f61d-468a-8d4b-c54bc7c71897)
+![image](https://github.com/SrWither/DiscordBSD/assets/59105868/dcd3c999-4321-452c-bb8d-1ed7aadfa620)
 
 _if you click on the icon, it will focus on the window_
 
