@@ -58,6 +58,6 @@
     "copyfiles": "^2.4.1",
     "electron-builder": "24.4.0",
     "typescript": "^5.2.2",
-    "electron": "27.1.2"
+    "electron": "28.2.0"
   }
 }
