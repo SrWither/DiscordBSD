@@ -3,9 +3,9 @@ An attempt at a native discord client for FreeBSD.
 
 ### Dependencies:
 ```
-pkg install electron27
-pkg install node18
-pkg install npm-node18
+pkg install electron28
+pkg install node20
+pkg install npm-node20
 ```
 **Make dependencie:**
 ```
