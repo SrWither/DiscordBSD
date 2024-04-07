@@ -2,7 +2,7 @@
 Name=Discord
 Version=0.0.28
 Type=Application
-StartupWMClass=discord
+StartupWMClass=discordbsd
 GenericName=Chat Online
 Comment=Discord is a free communications app that lets you share voice, video, and text chat with friends, game communities, and developers. It has hundreds of millions of users, making it one of the most popular ways to connect with people online.
 Icon=discicon
