@@ -8,9 +8,10 @@ import * as fs from "fs";
 import * as os from "os";
 
 const titlebarIsEnabled = getConfig().titlebar
+const hiddeOnClose = getConfig().hiddeOnClose
 
 Menu.setApplicationMenu(null);
-if(titlebarIsEnabled) {
+if (titlebarIsEnabled) {
   setupTitlebar();
 }
 
@@ -29,9 +30,8 @@ export class MainApp {
    */
   constructor(app: Electron.App) {
     this.app = app;
-    this.userAgent = `Mozilla/5.0 (X11; ${
-      os.type
-    } ${os.arch()}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36`;
+    this.userAgent = `Mozilla/5.0 (X11; ${os.type
+      } ${os.arch()}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36`;
     this.icons = {
       main: path.join(__dirname, "assets/icons/main.png"),
       tray: path.join(__dirname, "assets/icons/tray.png"),
@@ -94,7 +94,7 @@ export class MainApp {
     });
     this.win.webContents.setUserAgent(this.userAgent);
     this.win.loadURL("https://discord.com/app");
-    if(titlebarIsEnabled) {
+    if (titlebarIsEnabled) {
       attachTitlebarToWindow(this.win);
     }
   }
@@ -104,10 +104,12 @@ export class MainApp {
    */
   private windowEvents() {
     // hide window
-    this.win.on("close", (event: Event) => {
-      event.preventDefault();
-      this.win.hide();
-    });
+    if (hiddeOnClose) {
+      this.win.on("close", (event: Event) => {
+        event.preventDefault();
+        this.win.hide();
+      });
+    }
 
     // Open links in the browser.
     this.win.webContents.setWindowOpenHandler(

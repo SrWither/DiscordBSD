@@ -5,7 +5,7 @@
   "main": "./build/main.js",
   "scripts": {
     "build": "mkdir -p build && copyfiles -u 1 \"src/titlebar/**/*\" \"build\" && tsc -p .",
-    "run": "electron27 build/main.js",
+    "run": "electron build/main.js",
     "postbuild": "copyfiles -u 1 \"src/assets/**/*\" \"build\"",
     "make-app": "npm run build && npm run postbuild && npm run run",
     "clean": "rm -r build/",

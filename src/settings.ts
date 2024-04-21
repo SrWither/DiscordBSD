@@ -1,12 +1,13 @@
-import {BrowserWindow, ipcMain} from "electron";
+import { BrowserWindow, ipcMain } from "electron";
 import * as fs from "fs";
 import * as path from "path";
 
 export const configPath =
-    path.join(require("os").homedir(), ".config", "DiscordBSD");
+  path.join(require("os").homedir(), ".config", "DiscordBSD");
 export const filePath = path.join(configPath, "config.json");
 
 export interface ConfigData {
+  hiddeOnClose: boolean;
   titlebar: boolean;
   titlebarcolor: string;
 }
@@ -40,7 +41,7 @@ export class DiscordSettings {
 
     // Event handler for setting configuration data
     ipcMain.on("set-config",
-               (_event, config: ConfigData) => { setConfig(config); });
+      (_event, config: ConfigData) => { setConfig(config); });
 
     // Event handler for getting configuration data
     ipcMain.handle("get-config", (_event) => {
@@ -51,13 +52,13 @@ export class DiscordSettings {
 
   private createWindow() {
     this.win = new BrowserWindow({
-      title : "DiscordBSD Settings",
-      width : 640,
-      height : 480,
-      alwaysOnTop : true,
-      webPreferences : {
-        sandbox : false,
-        preload : path.join(__dirname, "preload/settingspl.js"),
+      title: "DiscordBSD Settings",
+      width: 640,
+      height: 480,
+      alwaysOnTop: true,
+      webPreferences: {
+        sandbox: false,
+        preload: path.join(__dirname, "preload/settingspl.js"),
       },
     });
 
@@ -117,7 +118,7 @@ export const setConfig = (data: ConfigData) => {
  * Get configuration data for DiscordBSD from the specified file path.
  * @returns Configuration data if successful, otherwise null.
  */
-export const getConfig = (): ConfigData|null => {
+export const getConfig = (): ConfigData | null => {
   initializeConfig()
   try {
     // Read the JSON data from the configuration file
@@ -139,8 +140,9 @@ export const initializeConfig = () => {
 
   if (!fs.existsSync(filePath)) {
     const initialData: ConfigData = {
-      titlebar : false,
-      titlebarcolor : "#6538b9",
+      hiddeOnClose: true,
+      titlebar: false,
+      titlebarcolor: "#6538b9",
     };
     setConfig(initialData);
   }
