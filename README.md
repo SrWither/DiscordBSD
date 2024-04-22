@@ -1,17 +1,14 @@
 # DiscordBSD
 An attempt at a native discord client for FreeBSD.
 
-### Dependencies:
+### Build Dependencies:
 ```
-pkg install electron28
+pkg install electron25
 pkg install node20
 pkg install npm-node20
-```
-**Make dependencie:**
-```
 electron.mk (/usr/ports/Mk/Uses/electron.mk)
 ```
-get it here: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses
+get `electron.mk` here: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses
 
 ### Download:
 you can download DiscordBSD from the releases: https://github.com/SrWither/DiscordBSD/releases/
