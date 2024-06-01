@@ -30,7 +30,7 @@ if everything compiled without errors, run the `install.sh` script.
 _the color scheme is from discord nitro_
 
 #### You can customize the titlebar
-![image](https://github.com/SrWither/DiscordBSD/assets/59105868/0b926c71-5b69-4613-aae2-3e87b03dcb31)
+![imagen](https://github.com/SrWither/DiscordBSD/assets/59105868/9dd33845-58cf-4a85-9ae9-55ddc8ddfd5e)
 
 ### System tray
 ![image](https://github.com/SrWither/DiscordBSD/assets/59105868/dcd3c999-4321-452c-bb8d-1ed7aadfa620)
@@ -49,4 +49,7 @@ _no sound for now_
 _you have to activate them there_
 
 ### Splash Screen
+New:
+![imagen](https://github.com/SrWither/DiscordBSD/assets/59105868/f5adbbf9-8b52-4afd-9c27-0fe6b6d17095)
+Old:
 ![Boot](https://user-images.githubusercontent.com/59105868/133003303-f491b628-0c66-4449-94f6-ed9d7f8d4f8a.gif)
