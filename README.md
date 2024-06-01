@@ -50,6 +50,9 @@ _you have to activate them there_
 
 ### Splash Screen
 New:
+
 ![imagen](https://github.com/SrWither/DiscordBSD/assets/59105868/f5adbbf9-8b52-4afd-9c27-0fe6b6d17095)
+
 Old:
+
 ![Boot](https://user-images.githubusercontent.com/59105868/133003303-f491b628-0c66-4449-94f6-ed9d7f8d4f8a.gif)
