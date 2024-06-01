@@ -208,19 +208,11 @@
       };
 
       console.log(configData);
-      // window.dbsdsettings.setConfig(configData);
+      window.dbsdsettings.setConfig(configData);
     }
 
     async function loadConfig() {
-      // let config = await window.dbsdsettings.getConfig();
-
-      // Simulated config data for demo
-      let config = {
-        hiddeOnClose: false,
-        oldSplashScreen: true,
-        titlebar: true,
-        titlebarcolor: "#6538b9"
-      };
+      let config = await window.dbsdsettings.getConfig();
 
       const hiddeCheckbox = document.getElementById("hiddeoncls");
       hiddeCheckbox.checked = config.hiddeOnClose;
