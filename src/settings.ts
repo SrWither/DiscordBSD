@@ -8,6 +8,7 @@ export const filePath = path.join(configPath, "config.json");
 
 export interface ConfigData {
   hiddeOnClose: boolean;
+  oldSplashScreen: boolean;
   titlebar: boolean;
   titlebarcolor: string;
 }
@@ -143,6 +144,7 @@ export const initializeConfig = () => {
       hiddeOnClose: true,
       titlebar: false,
       titlebarcolor: "#6538b9",
+      oldSplashScreen: false
     };
     setConfig(initialData);
   }

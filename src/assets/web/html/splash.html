@@ -1,14 +1,250 @@
-<video src="../../videos/splash.mp4" autoplay muted loop></video>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-    * {
-        overflow: hidden;
-    }
+    <title>Discord Splashscreen</title>
+    <style>
+      @import url("../../fonts/whitneybook.otf");
 
-    video {
-        height: 100vh;
+      * {
+        font-family: "Whitney", sans-serif;
+        /* overflow: hidden; */
+      }
+
+      body,
+      html {
+        /* margin: 0; */
+        /* padding: 0; */
+        /* height: 100%; */
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        /* background-color: #2c2f33; */
+        /* font-family: "Arial", sans-serif; */
+        border-radius: 20px;
+        overflow-y: hidden;
+      }
+
+      .container {
+        position: relative;
+        max-width: 700px;
         width: 100%;
-        object-fit: cover;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: #36393e;
+        /* border-radius: 20px; */
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .icon-spin {
         position: absolute;
-    }
-</style>
+        left: 16px;
+        top: 16px;
+        width: 40px;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+      }
+
+      .left-section,
+      .right-section {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .left-section {
+        background-color: #2c2f33;
+        text-align: center;
+        /* border-top-left-radius: 20px; */
+        /* border-bottom-left-radius: 20px; */
+        overflow: hidden;
+      }
+
+      .left-section img {
+        width: 120px;
+        animation: spin 3s ease-in-out infinite;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+      }
+
+      .left-section h1 {
+        margin-top: 16px;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .left-section p {
+        color: #a0a0a0;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+
+      .left-section .connecting {
+        margin-top: 32px;
+        color: #7289da;
+        font-size: 18px;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+
+      .right-section {
+        position: relative;
+        background-color: #2c2f33;
+        /* border-top-right-radius: 20px; */
+        /* border-bottom-right-radius: 20px; */
+        overflow: hidden;
+      }
+
+      .right-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right center;
+        border-radius: 20px;
+        transition:
+          transform 0.5s,
+          filter 0.5s;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+      }
+
+      .resources {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .resources h2 {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .resources a {
+        color: #7289da;
+        text-decoration: none;
+        margin: 0 8px;
+        transition: color 0.3s;
+      }
+
+      .resources a:hover {
+        color: #99aab5;
+        text-decoration: underline;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+
+        20% {
+          transform: rotate(10deg) scale(1.05);
+        }
+
+        40% {
+          transform: rotate(-5deg) scale(0.95);
+        }
+
+        60% {
+          transform: rotate(5deg) scale(1.02);
+        }
+
+        80% {
+          transform: rotate(-3deg) scale(0.98);
+        }
+
+        100% {
+          transform: rotate(0deg) scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <img
+        src="../../icons/tray.png"
+        alt="Discord Icon"
+        class="icon-spin"
+      />
+      <div class="left-section">
+        <div>
+          <img
+            src="../../icons/freebsd.webp"
+            alt="Discord White Icon"
+          />
+          <h1 id="mainmsg">Hold on tight while we're loading your adventure</h1>
+          <p id="funfact">Fun fact: We almost called ourselves Wyvern</p>
+          <p class="connecting">DiscordBSD</p>
+        </div>
+        <div class="resources">
+          <h2>Resources</h2>
+          <a href="https://www.freebsd.org/" target="_blank">FreeBSD</a>
+          <a href="https://discord.com/" target="_blank">Discord</a>
+        </div>
+      </div>
+      <div class="right-section">
+        <img
+          src="../../images/discordbg.jpg"
+          alt="Adventure Image"
+        />
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const mainMessages = [
+    "Hold on tight while we're loading your adventure",
+    "Get ready for an epic journey!",
+    "Your Discord adventure begins now.",
+    "Discover new communities on Discord!",
+    "Explore the world of Discord.",
+  ];
+
+  const funFacts = [
+    "Discord started as a project to simplify voice communication for gamers.",
+    "The Discord logo is inspired by a cross between a game controller and the letter D.",
+    "Discord has over 250 million registered users as of 2023.",
+    "The first version of Discord was released in 2015.",
+    "Discord's official mascot is a blue creature named Wumpus.",
+    "Discord's founders originally considered naming the platform Wyvern.",
+    "Discord has various communities known as servers, each with its own rules and themes.",
+    "The Discord desktop app is built using the Electron framework.",
+    "Discord hosts numerous events and competitions for its users.",
+    "Discord allows users to create custom emojis for their servers.",
+    "Discord has integrations with many popular games and applications.",
+    "FreeBSD is a free and open-source Unix-like operating system descended from Research Unix via the Berkeley Software Distribution.",
+    "FreeBSD's development began in 1993, making it one of the oldest open-source operating systems still in development.",
+    "The FreeBSD mascot is a stylized daemon named Beastie.",
+    "FreeBSD provides advanced networking, performance, security, and compatibility features.",
+    "FreeBSD is widely used in servers, desktops, and embedded systems.",
+    "FreeBSD's ports system provides a convenient way to install software from source.",
+    "FreeBSD is known for its stability and reliability, making it a popular choice for servers and high-performance computing.",
+    "FreeBSD has a strong community of developers and contributors worldwide.",
+    "FreeBSD supports a wide range of hardware platforms, from embedded systems to high-end servers.",
+  ];
+
+  function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  const mainMsgElement = document.getElementById("mainmsg");
+  mainMsgElement.textContent = getRandomItem(mainMessages);
+
+  const funFactElement = document.getElementById("funfact");
+  funFactElement.textContent = getRandomItem(funFacts);
+</script>
