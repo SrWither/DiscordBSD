@@ -5,7 +5,7 @@
   "main": "./build/main.js",
   "scripts": {
     "build": "mkdir -p build && copyfiles -u 1 \"src/titlebar/**/*\" \"build\" && tsc -p .",
-    "run": "electron27 build/main.js",
+    "run": "electron30 build/main.js",
     "postbuild": "copyfiles -u 1 \"src/assets/**/*\" \"build\"",
     "make-app": "npm run build && npm run postbuild && npm run run",
     "clean": "rm -r build/",
@@ -58,6 +58,6 @@
     "copyfiles": "^2.4.1",
     "electron-builder": "24.4.0",
     "typescript": "^5.2.2",
-    "electron": "28.2.0"
+    "electron": "30.4.0"
   }
 }
