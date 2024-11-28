@@ -1,19 +1,3 @@
-.screenshare-main {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  max-width: 500px;
-  max-height: 80%;
-  z-index: 99998;
-  padding: 20px;
-  background: #36393f;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
-}
-
 .discordbsd-screenshare {
   position: fixed;
   top: 0;
@@ -27,63 +11,134 @@
   justify-content: center;
 }
 
-.screenshare-cancel {
-  background-color: #ff4136;
-  color: #fff;
-  border: none;
-  padding: 10px 20px 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  margin: 1rem 0px 0rem;
-}
-
-
-.screenshare-cancel:hover {
-  background-color: #dc352a;
-}
-
-.screenshare-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 0;
+.screenshare-main * {
   margin: 0;
-  list-style: none;
-}
-
-.screenshare-source {
-  width: calc(50% - 5px);
-  margin-bottom: 10px;
-}
-
-.screenshare-source-selection {
-  display: block;
-  background-color: transparent;
-  border: none;
   padding: 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  display: block;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.screenshare-source-selection:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.screenshare-main {
+  background-color: rgb(24 24 27);
+  display: flex;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-width: 32rem;
 }
 
-.screenshare-source-image {
+.screenshare-header {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.screenshare-logo {
+  margin-right: 0.5rem;
+  height: 2.5rem;
+}
+
+.screenshare-title {
+  color: rgb(244 244 245);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.screenshare-lists {
+  display: grid;
+  overflow-y: scroll;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-height: 24rem;
+}
+
+.screenshare-lists-screen {
+  overflow: hidden;
+  padding: 0;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: rgb(63 63 70);
   width: 100%;
-  height: auto;
-  max-width: 200px;
-  max-height: 200px;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.screenshare-lists-screen:hover {
+  transform: scale(1.05);
+}
+
+.screenshare-lists-screen img {
+  object-fit: cover;
+  width: 100%;
+  height: 8rem;
+}
+
+.screenshare-lists-screen div {
+  padding: 0.5rem;
+  text-align: center;
+  background-color: rgb(39 39 42);
+}
+
+.screenshare-lists-screen div span {
+  color: rgb(244 244 245);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.screenshare-actionbar {
+  display: flex;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.screenshare-cancelbtn {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  background-color: #DC2626;
+  color: rgb(244 244 245);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.screenshare-cancelbtn:hover {
+  background-color: #B91C1C;
+}
+
+.screenshare-lists::-webkit-scrollbar {
+  width: 8px;
+}
+
+.screenshare-lists::-webkit-scrollbar-track {
+  background-color: rgb(39, 39, 42);
   border-radius: 4px;
 }
 
-.screenshare-source-name {
-  display: block;
-  margin-top: 5px;
-  text-align: center;
-  color: #fff;
+.screenshare-lists::-webkit-scrollbar-thumb {
+  background-color: rgb(63, 63, 70);
+  border-radius: 4px;
+  border: 2px solid rgb(39, 39, 42);
+}
+
+.screenshare-lists::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(74, 74, 74);
 }

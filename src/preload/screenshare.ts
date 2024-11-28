@@ -1,36 +1,41 @@
 import { ipcRenderer } from "electron";
 
 const desktopCapturer = {
-    getSources: (opts: any) => ipcRenderer.invoke("screenshare-get-sources", opts)
+  getSources: (opts: any) => ipcRenderer.invoke("screenshare-get-sources", opts)
 };
 
 export const screenPicker = async (): Promise<string> => {
   const sources: Electron.DesktopCapturerSource[] = await desktopCapturer.getSources({
-    types: ["screen", "window"]
+    types: ["screen", "window"],
+    thumbnailSize: { width: 800, height: 600 }
   });
 
   return `
   <div class="screenshare-main">
-    <ul class="screenshare-list">
-      ${
-        sources.map(
-          (source) =>
-          `
-          <li class="screenshare-source">
-          <button class="screenshare-source-selection screenshare-action-button" data-id="${source.id}" title="${source.name}">
-            <img class="screenshare-source-image" src="${source.thumbnail.toDataURL()}" />
-            <span class="screenshare-source-name">${source.name}</span>
-          </button>
+    <div class="screenshare-header">
+      <h2 class="screenshare-title">Select a Screen to Share</h2>
+    </div>
+    <ul class="screenshare-lists">
+      ${sources.map(
+    (source) => `
+          <li>
+            <button data-id="${source.id}" title="${source.name}" class="screenshare-lists-screen screenshare-action-button">
+              <img src="${source.thumbnail.toDataURL()}" alt="${source.name}" />
+              <div>
+                <span>${source.name}</span>
+              </div>
+            </button>
           </li>
           `
-        ).join("")
-      }
+  ).join("")
+    }
     </ul>
-    <div class="screenshare-actionbar screenshare-action-button">
-      <button class="screenshare-cancel" data-id="screenshare-cancel" title"cancel">Cancel</button>
+    <div class="screenshare-actionbar">
+      <button data-id="screenshare-cancel" title="Cancel" class="screenshare-cancelbtn screenshare-action-button">Cancel</button>
     </div>
   </div>
-  `
+`;
+
 }
 
 export const screenshareScript = `
@@ -46,6 +51,7 @@ window.navigator.mediaDevices.getDisplayMedia = () => new Promise(async (resolve
         button.addEventListener('click', async () => {
           try {
             const id = button.getAttribute('data-id');
+            console.log("ID: ", id);
             if (id === 'screenshare-cancel') {
               reject(new Error('Cancelled by user'));
             } else {
