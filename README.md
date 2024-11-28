@@ -41,7 +41,7 @@ _if you click on the icon, it will focus on the window_
 ![image](https://github.com/SrWither/DiscordBSD/assets/59105868/7f097273-7e21-4e66-b1f0-5cd33768b397)
 
 ### Screenshare
-![image](https://github.com/SrWither/DiscordBSD/assets/59105868/e9124e61-dbc3-416f-812a-10ac5257738d)
+![image](https://github.com/user-attachments/assets/4e68a537-47a9-44ba-b118-0c4d5b16b423)
 _no sound for now_
 
 ### Desktop Notifications
