@@ -23,6 +23,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
+        "electronZipDir": ".",
         "makers": [
           {
             "name": "@electron-forge/maker-zip",
