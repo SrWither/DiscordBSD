@@ -18,12 +18,17 @@
     "files": [
       "build/**/*",
       "package.json"
-    ]
+    ],
+    "asar": true
   },
   "config": {
     "forge": {
       "packagerConfig": {
         "electronZipDir": ".",
+        "asar": true,
+        "ignore": [
+          "\\.zip$"
+        ],
         "makers": [
           {
             "name": "@electron-forge/maker-zip",
