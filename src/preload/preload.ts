@@ -20,4 +20,8 @@ if(titlebar) {
 document.addEventListener('DOMContentLoaded', () => {
   const screenshareStyle = path.join(__dirname, "../assets/web/css/screenshare.css");
   injectStyle(fs.readFileSync(screenshareStyle, "utf8"));
+
+  const contextmenuStyle = path.join(__dirname, "../assets/web/css/contextmenu.css")
+
+  injectStyle(fs.readFileSync(contextmenuStyle, 'utf8'))
 })

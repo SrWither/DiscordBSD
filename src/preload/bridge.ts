@@ -1,6 +1,7 @@
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
 import { screenPicker } from "./screenshare"
 
 contextBridge.exposeInMainWorld("discordbsd", {
-  screenPicker
+  screenPicker,
+  downloadFile: (fileUrl: string) => ipcRenderer.invoke('download-file', fileUrl)
 });

@@ -6,6 +6,7 @@ import { screenshareScript } from "./preload/screenshare"
 import * as path from "path";
 import * as fs from "fs";
 import * as os from "os";
+import { downloadFile } from "./preload/downloads";
 
 const titlebarIsEnabled = getConfig().titlebar
 const hiddeOnClose = getConfig().hiddeOnClose
@@ -22,6 +23,7 @@ export class MainApp {
   private icons: { [key: string]: string };
   private systemTray: Tray;
   private rpc: string;
+  private contextmenu: string;
   private splash: Splash;
 
   /**
@@ -39,6 +41,10 @@ export class MainApp {
     this.rpc = fs
       .readFileSync(path.join(__dirname, "assets/web/js/rpc.js"))
       .toString();
+    this.contextmenu = fs
+      .readFileSync(path.join(__dirname, "assets/web/js/contextmenu.js"))
+      .toString();
+
     this.splash = new Splash();
   }
 
@@ -134,6 +140,9 @@ export class MainApp {
 
   private ipcEvents() {
     ipcMain.handle("screenshare-get-sources", (_event, opts) => desktopCapturer.getSources(opts));
+    ipcMain.handle('download-file', async (_event, fileUrl: string) => {
+      return await downloadFile(fileUrl);
+    });
   }
 
   /**
@@ -155,6 +164,7 @@ export class MainApp {
       this.trayEvents();
       this.win.show();
       this.win.webContents.executeJavaScript(this.rpc);
+      this.win.webContents.executeJavaScript(this.contextmenu)
       this.win.webContents.executeJavaScript(screenshareScript);
     });
 
