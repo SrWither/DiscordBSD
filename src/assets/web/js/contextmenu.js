@@ -3,10 +3,21 @@
   menu.id = 'custom-context-menu';
   document.body.appendChild(menu);
 
+  let activeImage = null
+
   document.addEventListener('contextmenu', (event) => {
     const target = event.target;
     if (target.tagName === 'IMG' && target.className.startsWith('slide_')) {
       event.preventDefault();
+      if (activeImage) {
+        activeImage.removeEventListener('click')
+      }
+      activeImage = target
+      target.addEventListener('click', () => {
+        const menu = document.getElementById('custom-context-menu');
+        if (menu) menu.style.display = 'none';
+        activeImage = null
+      })
       showContextMenu(event.pageX, event.pageY, target);
     }
   });
@@ -14,12 +25,14 @@
   document.addEventListener('click', () => {
     const menu = document.getElementById('custom-context-menu');
     if (menu) menu.style.display = 'none';
+    activeImage = null
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       const menu = document.getElementById('custom-context-menu');
       if (menu) menu.style.display = 'none';
+      activeImage = null
     }
   });
 
