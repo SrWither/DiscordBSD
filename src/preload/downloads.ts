@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as os from 'os'
 import * as https from 'https';
 import * as http from 'http';
 import { URL } from 'url';
@@ -19,7 +20,7 @@ export async function downloadFile(fileUrl: string): Promise<DownloadResult> {
 
     const { filePath } = await dialog.showSaveDialog({
       title: 'Save File',
-      defaultPath: fileName,
+      defaultPath: path.join(os.homedir(), fileName),
       filters: [{ name: 'All Files', extensions: ['*'] }]
     });
 
