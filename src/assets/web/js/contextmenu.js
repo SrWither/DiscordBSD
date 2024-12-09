@@ -7,18 +7,24 @@
 
   document.addEventListener('contextmenu', (event) => {
     const target = event.target;
-    if (target.tagName === 'IMG' && target.className.startsWith('slide_')) {
+    const isImage = target.tagName === 'IMG' && target.className.startsWith('slide_');
+    const isVideo = target.tagName === 'VIDEO' && target.className.startsWith('embedVideo_');
+
+    if (isImage || isVideo) {
       event.preventDefault();
       if (activeImage) {
-        activeImage.removeEventListener('click')
+        activeImage.removeEventListener('click');
       }
-      activeImage = target
+      activeImage = target;
+
       target.addEventListener('click', () => {
         const menu = document.getElementById('custom-context-menu');
         if (menu) menu.style.display = 'none';
-        activeImage = null
-      })
-      showContextMenu(event.pageX, event.pageY, target);
+        activeImage = null;
+      });
+
+      const type = isImage ? 'img' : 'gif';
+      showContextMenu(event.pageX, event.pageY, target, type);
     }
   });
 
@@ -36,17 +42,28 @@
     }
   });
 
-  function showContextMenu(x, y, image) {
+  function getUrlFromElement(element) {
+    return element.parentElement.parentElement.parentElement.children[1].children[0].href
+  }
+
+  function showContextMenu(x, y, element, type) {
     const menu = document.getElementById('custom-context-menu');
 
     menu.innerHTML = '';
 
-    const options = [
-      { text: 'Copy Image', action: () => copyImage(image.src) },
-      { text: 'Download Image', action: () => downloadImage(image.src) },
-      { text: 'Copy Link', action: () => copyImageLink(image.src) },
-      { text: 'Open Link', action: () => openImage(image.src) }
-    ];
+    const cdnurl = getUrlFromElement(element)
+
+    const options = type === 'img'
+      ? [
+        { text: 'Copy Image', action: () => copyImage(cdnurl) },
+        { text: 'Download Image', action: () => downloadImage(cdnurl) },
+        { text: 'Copy Link', action: () => copyImageLink(cdnurl) },
+        { text: 'Open Link', action: () => openImage(cdnurl) }
+      ]
+      : [
+        { text: 'Copy Link', action: () => copyImageLink(cdnurl) },
+        { text: 'Open Link', action: () => openImage(cdnurl) }
+      ];
 
     options.forEach(({ text, action }) => {
       const option = document.createElement('div');
