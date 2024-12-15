@@ -3,11 +3,8 @@ An attempt at a native discord client for FreeBSD.
 
 ### Build Dependencies:
 ```
-pkg install electron30
-pkg install node20
-pkg install npm-node20
-pkg install zip
-pkg install jq
+pkg install electron32 npm-node20 jq zip
+
 electron.mk (/usr/ports/Mk/Uses/electron.mk)
 ```
 get `electron.mk` here: https://github.com/tagattie/FreeBSD-Electron/tree/master/Mk/Uses
